@@ -1,15 +1,13 @@
 import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-
-// Add console.log to check if environment variables are loaded
-console.log('Hasura URL:', process.env.REACT_APP_HASURA_ENDPOINT);
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import EmployeeList from './components/EmployeeList';
+import './App.css';
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_HASURA_ENDPOINT,
+  uri: 'YOUR_HASURA_ENDPOINT',
   cache: new InMemoryCache(),
   headers: {
-    'x-hasura-admin-secret': process.env.REACT_APP_HASURA_ADMIN_SECRET,
-    'content-type': 'application/json'
+    'x-hasura-admin-secret': 'YOUR_ADMIN_SECRET'
   }
 });
 
