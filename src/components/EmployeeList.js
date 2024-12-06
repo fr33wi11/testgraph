@@ -19,43 +19,31 @@ function EmployeeList() {
   const { loading, error, data } = useQuery(GET_EMPLOYEES);
 
   if (loading) return <p>Loading...</p>;
-  if (error) {
-    console.error('GraphQL Error:', error);
-    return (
-      <div>
-        <p>Error: {error.message}</p>
-        <p>Details: {JSON.stringify(error.networkError || error.graphQLErrors)}</p>
-      </div>
-    );
-  }
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="employee-list">
       <h2>Employees</h2>
-      {data && data.employees ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Department</th>
-              <th>Leave Balance</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Leave Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.employees.map(employee => (
+            <tr key={employee.id}>
+              <td>{employee.first_name} {employee.last_name}</td>
+              <td>{employee.email}</td>
+              <td>{employee.department}</td>
+              <td>{employee.leave_balance}</td>
             </tr>
-          </thead>
-          <tbody>
-            {data.employees.map(employee => (
-              <tr key={employee.id}>
-                <td>{employee.first_name} {employee.last_name}</td>
-                <td>{employee.email}</td>
-                <td>{employee.department}</td>
-                <td>{employee.leave_balance}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No employees found</p>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
