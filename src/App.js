@@ -4,10 +4,10 @@ import EmployeeList from './components/EmployeeList';
 import './App.css';
 
 const client = new ApolloClient({
-  uri: 'YOUR_HASURA_ENDPOINT',
+  uri: process.env.REACT_APP_HASURA_ENDPOINT,
   cache: new InMemoryCache(),
   headers: {
-    'x-hasura-admin-secret': 'YOUR_ADMIN_SECRET'
+    'x-hasura-admin-secret': process.env.REACT_APP_HASURA_ADMIN_SECRET
   }
 });
 
